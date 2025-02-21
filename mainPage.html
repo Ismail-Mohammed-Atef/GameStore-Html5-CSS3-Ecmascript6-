@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/icon.jpg" type="image/x-icon">
+    <title>Super Ismail Games</title>
+
+    <!-- Google Fonts Link -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Link -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            text-shadow: 2px 2px darkblue;
+        }
+        
+        header h1 {
+            font-size: 3rem;
+            margin-top: 20px;
+            text-transform: uppercase;
+        }
+        
+        header h2 {
+            font-size: 1.5rem;
+            max-width: 80%;
+            margin: 10px auto;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .game-section {
+            position: relative;
+            width: 45%;
+            min-width: 300px;
+            height: 450px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .game-section:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        #mario {
+            background: url('assets/mainphoto.jpg') no-repeat center center/cover;
+        }
+
+        #super {
+            background: url('assets/ismailman.jpg') no-repeat center center/cover;
+        }
+
+        .game-info {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .game-info p {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .game-button {
+            padding: 12px 24px;
+            font-size: 1.3rem;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .game-button.green {
+            background: linear-gradient(to right, #4CAF50, #2E7D32);
+        }
+        
+        .game-button.red {
+            background: linear-gradient(to right, #FF5722, #D32F2F);
+        }
+
+        .game-button:hover {
+            opacity: 0.8;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header itemscope itemtype="https://schema.org/Person">
+        <h1>Welcome to Super Ismail Games!</h1>
+        <h2>Hello, I am <span itemprop="name">Ismail Mohammed Atef</span>, an aspiring <span itemprop="jobTitle">developer</span> at <span itemprop="worksFor">ITI</span> with a passion for problem-solving and web development. I hope you enjoy! 
+            <i class="fas fa-smile"></i>
+        </h2>
+    </header>
+    
+    <main>
+        <section class="game-section" id="mario">
+            <article class="game-info">
+                <p>Game inspired by Super Mario. Try to avoid all obstacles until you reach the end and save the princess!
+                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12L20 12M12 4L12 20" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+                </p>
+                <a href="SuperMario/index.html" class="game-button green">Play Super Som3a</a>
+            </article>
+        </section>
+        <section class="game-section" id="super">
+            <article class="game-info">
+                <p>Game inspired by Superman. Avoid all clouds in your flight until you reach the end to save the city! 
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h18M3 12a9 9 0 0 1 18 0M3 12a9 9 0 0 0 18 0" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+                </p>
+                <a href="SuperMan/Superman.html" class="game-button red">Play Ismail Man</a>
+            </article>
+        </section>
+    </main>
+    
+    <footer>
+        <h3>&copy; 2025 Ismail Atef. All rights reserved.</h3>   
+    </footer>
+</body>
+</html>

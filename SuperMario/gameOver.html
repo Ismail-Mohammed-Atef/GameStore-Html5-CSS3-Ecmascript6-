@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/icon.jpg" type="image/x-icon">
+    
+    <title>Game Over</title>
+    <style>
+        body {
+            text-align: center;
+            background: url('../assets/gameover.gif') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Press Start 2P', cursive;
+            background-color: black;
+            
+        }
+        h1 {
+            
+            font-size: 50px;
+            margin-top: 20%;
+            text-shadow: 3px 3px red;
+        }
+        .button {
+            font-size: 20px;
+            padding: 10px 20px;
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            top: 500px;
+            transition: 0.3s;
+        }
+        .button:hover{
+            background-color: brown;
+        }
+        
+        .game-container {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        background: url("../high.jpg") repeat-x;
+        background-size: contain;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <audio id="lost" src="../assets/08. Lost a Life.mp3" autoplay></audio>
+        <button class="button" onclick="restartGame()">Restart</button>
+        <button class="button" onclick="goToHome()">Back to Home</button>
+    </main>
+    <script>
+        function restartGame() {
+            window.location.href = "../SuperMario/index.html";
+        }
+        function goToHome() {
+            window.location.href = "../mainPage.html";
+        }
+    </script>
+</body>
+</html>

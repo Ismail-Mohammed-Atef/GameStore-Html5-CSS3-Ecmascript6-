@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/icon.jpg" type="image/x-icon">
+    <title>Congratulations!</title>
+    <style>
+        body {
+            text-align: center;
+            background: url('../assets/confetti-10.gif.webp') repeat-x center center fixed;
+            background-size: contain;
+            font-family: 'Press Start 2P', cursive;
+            color: yellow;
+            background-color: bisque;
+        }
+        h1 {
+            font-size: 50px;
+            margin-top: 20%;
+            text-shadow: 3px 3px blue;
+        }
+        .button {
+            font-size: 20px;
+            padding: 10px 20px;
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            
+        }
+        .button:hover{
+            background-color: darkgreen;
+        }
+        .game-container {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        background: url("../high.jpg") repeat-x;
+        background-size: contain;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>YOU WIN!</h1>
+        <audio id="won" src="../assets/heroes-249420.mp3"></audio>
+        <button class="button" onclick="playAgain()">Play Again</button>
+        <button class="button" onclick="goToHome()">Back To Home</button>
+    </main>
+    <script>
+        function playAgain() {
+            window.location.href = "../SuperMan/Superman.html";
+        }
+        function goToHome() {
+            window.location.href = "../mainPage.html";
+        }
+        document.addEventListener(
+        "mousemove",
+        function () {
+          let audio = document.getElementById("won");
+          if (audio.paused) {
+            audio.play();
+          }
+        },
+        { once: true }
+      );
+    </script>
+</body>
+</html>

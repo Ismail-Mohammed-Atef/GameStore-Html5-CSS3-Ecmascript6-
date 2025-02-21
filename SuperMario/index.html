@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../assets/icon.jpg" type="image/x-icon" />
+    <title>Mario Runner</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #87ceeb; /* Sky color */
+        overflow: hidden;
+      }
+      h1 {
+        color: white;
+        text-shadow: 3px 3px #28a745;
+        position: relative;
+        top: 30px;
+        font-size: 80px;
+        margin-bottom: 20px;
+        margin-top: 60px;
+      }
+
+      .game-container {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        background: url("../assets/high.jpg") repeat-x;
+        background-size: contain;
+      }
+      .mario,
+      .goomba,
+      .flag {
+        position: absolute;
+        bottom: 4%;
+      }
+      .mario {
+        left: 5%;
+        width: 5vw;
+        height: 5vw;
+        background: url("../assets/Ismael\ 01\ copy.png") no-repeat;
+        background-size: contain;
+      }
+      .goomba {
+        right: 0;
+        width: 4vw;
+        height: 4vw;
+        background: url("../assets/favpng_mario-pipe-clip-art.png") no-repeat;
+        background-size: contain;
+      }
+      .flag {
+        right: 5%;
+        width: 14vw;
+        height: 20vw;
+        background: url("../assets/favpng_super-mario-bros-2-luigi.png") no-repeat;
+        background-size: contain;
+        display: none;
+      }
+      #progress-bar-container {
+        position: absolute;
+        top: 20px; 
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10; 
+      }
+      svg {
+        width: 200px;
+        height: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="game-container">
+      <audio id="game" src="../assets/01. Ground Theme.mp3"></audio>
+      <h1>Avoid all obstacles !</h1>
+      <figure class="mario" id="mario"></figure>
+      <figure class="goomba" id="goomba"></figure>
+      <figure class="flag" id="flag"></figure>
+      <section id="progress-bar-container">
+        <svg>
+          <rect width="100%" height="100%" fill="lightgray" />
+          <rect id="progress-bar" width="0%" height="100%" fill="green" />
+        </svg>
+        <p style="color: aliceblue;">Progress: <span id="progress-text">0%</span></p>
+      </section>
+    </main>
+
+    <script>
+      const mario = document.getElementById("mario");
+      const goomba = document.getElementById("goomba");
+      const flag = document.getElementById("flag");
+      let isJumping = false;
+      let stopJumping = false;
+      let gameRunning = true;
+      let marioPosition = 5;
+      let moveDirection = 0;
+      let moveSpeed = 0.5;
+      let ismoveAble = true;
+      let interval = null;
+      let progress = 0;
+      const progressBar = document.getElementById("progress-bar");
+      const progressText = document.getElementById("progress-text");
+
+      document.addEventListener("keydown", function (event) {
+        if (event.code === "Space" || event.code === "ArrowUp") {
+          stopJumping = false;
+        }
+        if ((event.code === "Space" || event.code === "ArrowUp") && !isJumping)
+          jump();
+        if (event.key === "ArrowRight") moveDirection = 0.5;
+        if (event.key === "ArrowLeft") moveDirection = -0.5;
+      });
+
+      document.addEventListener("keyup", function (event) {
+        if (event.code === "Space" || event.code === "ArrowUp") {
+          stopJumping = true;
+        }
+        if (event.code === "ArrowRight" || event.code === "ArrowLeft")
+          moveDirection = 0;
+      });
+
+      function jump() {
+        let position = 5;
+        if (stopJumping) return;
+
+        isJumping = true;
+        let upInterval = setInterval(() => {
+          if (position >= 25) {
+            clearInterval(upInterval);
+            let downInterval = setInterval(() => {
+              if (position <= 5) {
+                clearInterval(downInterval);
+                isJumping = false;
+                jump();
+              }
+              position -= 0.375;
+              mario.style.bottom = position + "%";
+            }, 5);
+          }
+          position += 0.375;
+          mario.style.bottom = position + "%";
+        }, 5);
+      }
+
+      function moveMario() {
+        if (ismoveAble) {
+          if (moveDirection !== 0) {
+            marioPosition += moveSpeed * moveDirection;
+            if (marioPosition < 0) marioPosition = 0;
+            if (marioPosition > 95) marioPosition = 95;
+            mario.style.left = marioPosition + "%";
+          }
+          requestAnimationFrame(moveMario);
+        }
+      }
+
+      function moveGoomba() {
+        let goombaPosition = 100;
+        let speed = 0.3;
+        let count = 0;
+        interval = setInterval(() => {
+          if (gameRunning) {
+            if (goombaPosition < -5) {
+              goombaPosition = 100;
+              if (count === 1) {
+                //clearInterval(interval);
+                speed = 0.8;
+              } else if (count === 3) {
+                speed = 1.2;
+              } else if (count === 6) {
+                speed = 1.7;
+              } else if (count === 10) {
+                gameRunning = false;
+                let flag = document.getElementById("flag");
+                flag.style.display = "block";
+                flag.style.left = 80 + "%";
+              }
+              count++;
+            } else {
+            }
+            goombaPosition -= speed;
+            goomba.style.left = goombaPosition + "%";
+          }
+          checkCollision();
+          checkFlagCollision();
+        }, 20);
+      }
+
+      function checkCollision() {
+        let marioRect = mario.getBoundingClientRect();
+        let goombaRect = goomba.getBoundingClientRect();
+        if (
+          marioRect.right > goombaRect.left &&
+          marioRect.left < goombaRect.right &&
+          marioRect.bottom > goombaRect.top &&
+          marioRect.top < goombaRect.bottom
+        ) {
+          gameRunning = false;
+          window.location.href = "../SuperMario/gameOver.html";
+          return;
+        }
+      }
+      function checkFlagCollision() {
+        let marioRect = mario.getBoundingClientRect();
+        let flagRect = flag.getBoundingClientRect();
+
+        if (
+          marioRect.right > flagRect.left + 10 &&
+          marioRect.left < flagRect.right - 10 &&
+          marioRect.bottom > flagRect.top &&
+          marioRect.top < flagRect.bottom
+        ) {
+          gameRunning = false;
+
+          window.location.href = "../SuperMario/win.html";
+          return;
+        }
+      }
+      document.addEventListener(
+        "keydown",
+        function () {
+          let audio = document.getElementById("game");
+          if (audio.paused) {
+            audio.play();
+          }
+        },
+        { once: true }
+      );
+      moveMario();
+      if (ismoveAble) {
+        moveGoomba();
+      }
+      function updateProgress() {
+        if (progress < 100) {
+          progress += 1;
+          progressBar.setAttribute("width", progress + "%");
+          progressText.textContent = progress + "%";
+        }
+      }
+
+      setInterval(updateProgress, 300);
+    </script>
+  </body>
+</html>

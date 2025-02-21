@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/Icon.jpg" type="image/x-icon">
+    <title>Main Menu</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url("../assets/mainphoto.jpg");
+            overflow: hidden;
+            background-size: cover;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .menu {
+            padding: 20px;
+            border-radius: 10px;
+            background: transparent;
+        }
+        h1 {
+            color: white;
+            text-shadow: 3px 3px #28a745;
+            position: relative;
+            top: -230px;
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            background: #28a745;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <main class="menu">
+        <h1><mark style="text-shadow: 3px 3px red;font-size: 110px;background-color: transparent; color: aliceblue;">Ismail</mark> In Mario World !</h1>
+        <button id="startButton">Start Game</button>
+    </main>
+
+    <script>
+        document.getElementById("startButton").addEventListener("click", function() {
+            window.location.href = "index.html"; // Redirect to the game page
+        });
+    </script>
+</body>
+</html>
